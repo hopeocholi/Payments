@@ -1,13 +1,13 @@
 # Payments and Transaction Services: Crypto Enforcement, Credit Risk, and Stablecoin Solvency
 
-A three-part MSc FinTech study spanning regulatory data science, credit-default machine learning, and structural credit-risk analysis of stablecoins under the GENIUS Act.
+A three-part FinTech study spanning regulatory data science, credit-default machine learning, and structural credit-risk analysis of stablecoins under the GENIUS Act.
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.x-orange)
 ![Tests](https://img.shields.io/badge/tests-pytest-green)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-Author: **Hope Eneojo Ocholi** — MSc FinTech, National College of Ireland (module H9PTS, Payments and Transaction Services).
+Author: **Hope Eneojo Ocholi**
 
 ---
 
@@ -15,11 +15,11 @@ Author: **Hope Eneojo Ocholi** — MSc FinTech, National College of Ireland (mod
 
 The project has three self-contained sections that together move from regulatory data, to predictive modelling, to structural theory.
 
-**Section 1 — Crypto enforcement fines.** A hand-curated database of U.S. crypto-enforcement actions (SEC, CFTC, DOJ, FinCEN, OFAC, NYDFS and others), extended from a 103-record baseline with 40 newly researched and source-verified records spanning February 2024 to February 2026. This deliberately brackets the January 2025 change in federal regulatory posture. The section cleans the free-text fields, engineers analysable categories, runs exploratory analysis across regulators and eras, and fits a decision-tree model.
+**Section 1: Crypto enforcement fines.** A hand-curated database of U.S. crypto-enforcement actions (SEC, CFTC, DOJ, FinCEN, OFAC, NYDFS and others), extended from a 103-record baseline with 40 newly researched and source-verified records spanning February 2024 to February 2026. This deliberately brackets the January 2025 change in federal regulatory posture. The section cleans the free-text fields, engineers analysable categories, runs exploratory analysis across regulators and eras, and fits a decision-tree model.
 
-**Section 2 — Credit-default risk.** A full machine-learning pipeline on the "Default of Credit Card Clients" schema: data-quality auditing, behavioural feature engineering, class-imbalance handling, and a nine-model field (logistic regression, random forest, XGBoost, SVM, a deep neural network, LightGBM, CatBoost, a stacking ensemble and a soft-voting blend), with an econometric layer (odds ratios, marginal effects, VIF) and SHAP attributions.
+**Section 2: Credit-default risk.** A full machine-learning pipeline on the "Default of Credit Card Clients" schema: data-quality auditing, behavioural feature engineering, class-imbalance handling, and a nine-model field (logistic regression, random forest, XGBoost, SVM, a deep neural network, LightGBM, CatBoost, a stacking ensemble and a soft-voting blend), with an econometric layer (odds ratios, marginal effects, VIF) and SHAP attributions.
 
-**Section 3 — Stablecoin solvency.** The Merton structural credit-risk model applied to a payment-stablecoin issuer under the GENIUS Act of 2025. It formalises the issuer's balance sheet against the Act's 1:1 reserve requirement, derives the equity-as-call-option result, and analyses interest-rate and liquidity risks the Merton model does not capture directly. Delivered as a written report ([`reports/`](reports/)).
+**Section 3: Stablecoin solvency.** The Merton structural credit-risk model applied to a payment-stablecoin issuer under the GENIUS Act of 2025. It formalises the issuer's balance sheet against the Act's 1:1 reserve requirement, derives the equity-as-call-option result, and analyses interest-rate and liquidity risks the Merton model does not capture directly. Delivered as a written report ([`reports/`](reports/)).
 
 ## Highlights
 
@@ -49,22 +49,7 @@ The enforcement database captures the regulatory-posture shift the sample was de
 ├── docs/                    # Section notes and data dictionary
 ├── requirements.txt
 └── README.md
-```
 
-## Quickstart
-
-```bash
-git clone https://github.com/<your-username>/payments-transaction-services.git
-cd payments-transaction-services
-
-python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-# run the tests
-pytest -q
-
-# open the analysis notebook
-jupyter lab notebooks/CA1_crypto_fines_and_credit_risk.ipynb
 ```
 
 ### Using the library directly
