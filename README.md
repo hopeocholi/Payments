@@ -4,10 +4,12 @@ A three-part FinTech study spanning regulatory data science, credit-default mach
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.x-orange)
-![Tests](https://img.shields.io/badge/tests-pytest-green)
+[![Tests](https://github.com/hopeocholi/Payments/actions/workflows/tests.yml/badge.svg)](https://github.com/hopeocholi/Payments/actions/workflows/tests.yml)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-Author: **Hope Eneojo Ocholi**
+Author: **Hope Eneojo Ocholi** · MSc in FinTech, National College of Ireland (Payments and Transaction Services, H9PTS)
+
+> **What I wanted to find out.** Did U.S. crypto enforcement really soften after January 2025, or did it just change shape? To answer that, I extended the enforcement database myself with 40 source-verified actions, then paired it with a credit-default pipeline and a structural look at how safe a fully reserved stablecoin issuer really is.
 
 ---
 
@@ -37,19 +39,26 @@ The enforcement database captures the regulatory-posture shift the sample was de
 
 ```
 .
-├── src/                     # Reusable, tested analysis library
-│   ├── crypto_fines.py      # Fine parsing, entity/outcome/era classification
-│   ├── credit_risk.py       # Credit-card cleaning + behavioural features
-│   └── merton.py            # Merton model: equity-as-call, PD, distance to default
-├── notebooks/               # Combined Section 1 + Section 2 analysis notebook
-├── reports/                 # Section 3 (Merton/GENIUS) and combined PDF reports
-├── data/                    # The crypto enforcement fines dataset (CSV)
-├── figures/                 # Summary charts generated from the data and models
-├── tests/                   # pytest suite (17 tests)
-├── docs/                    # Section notes and data dictionary
+├── src/                                     # Reusable, tested analysis library
+│   ├── crypto_fines.py                      # Fine parsing, entity/outcome/era classification
+│   ├── credit_risk.py                       # Credit-card cleaning + behavioural features
+│   └── merton.py                            # Merton model: equity-as-call, PD, distance to default
+├── CA1_crypto_fines_and_credit_risk.ipynb   # Section 1 + Section 2 analysis notebook
+├── reports/                                 # Section 3 (Merton/GENIUS) and combined PDF reports
+├── data/                                    # The crypto enforcement fines dataset (CSV)
+├── figures/                                 # Summary charts generated from the data and models
+├── tests/                                   # pytest suite (17 tests), run on every push
 ├── requirements.txt
 └── README.md
+```
 
+### Run it locally
+
+```bash
+git clone https://github.com/hopeocholi/Payments.git
+cd Payments
+pip install -r requirements.txt
+pytest -q
 ```
 
 ### Using the library directly
@@ -69,14 +78,14 @@ merton_default_probability(asset_value=1.02, debt_face=1.00, r=0.04, sigma=0.04,
 
 ## The models and methods
 
-- **Fine-amount parser** that preserves the distinction between "no monetary fine reported" (missing) and "explicitly zero paid" (0.0) — a distinction that matters for the dismissal-rate analysis.
+- **Fine-amount parser** that preserves the distinction between "no monetary fine reported" (missing) and "explicitly zero paid" (0.0), a distinction that matters for the dismissal-rate analysis.
 - **Entity, outcome and era classifiers** turning free text into analysable categories, including a rule that separates named respondents from policy and legislative events.
-- **Behavioural credit features** — utilisation ratio, months delinquent, average payment delay, and a six-month payment-to-bill ratio — that make repayment behaviour explicit to the models.
-- **Merton structural model** — equity as a call on assets, distance to default, risk-neutral default probability, and the implied credit spread.
+- **Behavioural credit features:** utilisation ratio, months delinquent, average payment delay, and a six-month payment-to-bill ratio, which make repayment behaviour explicit to the models.
+- **Merton structural model:** equity as a call on assets, distance to default, risk-neutral default probability, and the implied credit spread.
 
-See [`docs/SECTIONS.md`](docs/SECTIONS.md) for a section-by-section walkthrough and [`docs/DATA.md`](docs/DATA.md) for the enforcement-database data dictionary.
+The enforcement dataset is in [`data/DataCryptoFines.csv`](data/DataCryptoFines.csv): one row per action, with the date, regulator, entity, category, description, fine, outcome, regulations violated and source links, plus three derived fields (fine in USD millions, administration era, and a dismissal or closure flag).
 
-## Data provenance and honest caveats
+## Data provenance and caveats
 
 The enforcement records were individually cross-checked against a primary regulatory source (SEC.gov, CFTC.gov, Justice.gov, FinCEN.gov, NYDFS press releases) and a reputable secondary source, with two originally illustrative composites replaced by fully verified named cases. Section 2 uses the publicly archived "Default of Credit Card Clients" dataset as the closest peer-reviewed analogue to the target prediction problem; the pipeline is written against named feature groups rather than dataset-specific column names, so the data source is substitutable. Section 3 is grounded in the actual text of the GENIUS Act and its 2026 implementing rulemakings.
 
